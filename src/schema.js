@@ -37,6 +37,7 @@ const typeDefs = gql`
 
   type Query {
     photos: [Photo]
+    randomPhoto: [Photo]
     photo(id: ID!): Photo
     user(id: ID!): User
   }

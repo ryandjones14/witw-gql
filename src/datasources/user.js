@@ -1,7 +1,7 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
 require('dotenv').config();
 
-class PhotoAPI extends RESTDataSource {
+class UserAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.unsplash.com/';
@@ -12,15 +12,6 @@ class PhotoAPI extends RESTDataSource {
     return Array.isArray(response)
       ? response.map(photo => this.photoReducer(photo))
       : [];
-  }
-
-  async getRandomPhoto() {
-    const response = await this.get(`photos/random?client_id=${process.env.UNSPLASH_KEY}&orientation=landscape`);
-    let resp = this.photoReducer(response);
-    if (resp.location && resp.location.country === null || resp.location.country === "") {
-      resp.location.country = "POTATOLAND";
-    }
-    return [resp];
   }
 
   photoReducer(photo) {
@@ -51,4 +42,4 @@ class PhotoAPI extends RESTDataSource {
   }
 }
 
-module.exports = PhotoAPI;
+module.exports = UserAPI;
