@@ -9,8 +9,9 @@ class PhotoAPI extends RESTDataSource {
 
   async getRandomPhotos() {
     let result = [];
+    console.log('getting random photos')
     do {
-      const response = await this.get(`photos/random?client_id=${process.env.UNSPLASH_KEY}&count=30&orientation=landscape`);
+      const response = await this.get(`photos/random?client_id=${process.env.UNSPLASH_KEY}&count=5&orientation=landscape`);
       let photos = Array.isArray(response)
         ? response.map(photo => this.photoReducer(photo))
         : [];
@@ -19,7 +20,7 @@ class PhotoAPI extends RESTDataSource {
           result.push(photo);
         }
       });
-    } while (result.length < 10);
+    } while (result.length < 1)
     return result;
   }
 
